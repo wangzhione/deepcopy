@@ -248,7 +248,7 @@ func TestSimple(t *testing.T) {
 CopyBools:
 	Bools := []bool{true, true, false, false}
 	cpyB := first(Copy(Bools)).([]bool)
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyB)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Bools)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyB)).Data {
 		t.Error("[]bool: expected SliceHeader data pointers to point to different locations, they didn't")
 		goto CopyBytes
 	}
@@ -265,7 +265,7 @@ CopyBools:
 CopyBytes:
 	Bytes := []byte("hello")
 	cpyBt := first(Copy(Bytes)).([]byte)
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyBt)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Bytes)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyBt)).Data {
 		t.Error("[]byte: expected SliceHeader data pointers to point to different locations, they didn't")
 		goto CopyInts
 	}
@@ -282,7 +282,7 @@ CopyBytes:
 CopyInts:
 	Ints := []int{42}
 	cpyI := first(Copy(Ints)).([]int)
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyI)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Ints)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyI)).Data {
 		t.Error("[]int: expected SliceHeader data pointers to point to different locations, they didn't")
 		goto CopyUints
 	}
@@ -299,7 +299,7 @@ CopyInts:
 CopyUints:
 	Uints := []uint{1, 2, 3, 4, 5}
 	cpyU := first(Copy(Uints)).([]uint)
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyU)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Uints)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyU)).Data {
 		t.Error("[]: expected SliceHeader data pointers to point to different locations, they didn't")
 		goto CopyFloat32s
 	}
@@ -316,7 +316,7 @@ CopyUints:
 CopyFloat32s:
 	Float32s := []float32{3.14}
 	cpyF := first(Copy(Float32s)).([]float32)
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyF)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Float32s)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyF)).Data {
 		t.Error("[]float32: expected SliceHeader data pointers to point to different locations, they didn't")
 		goto CopyInterfaces
 	}
@@ -333,7 +333,7 @@ CopyFloat32s:
 CopyInterfaces:
 	Interfaces := []interface{}{"a", 42, true, 4.32}
 	cpyIf := first(Copy(Interfaces)).([]interface{})
-	if (*reflect.SliceHeader)(unsafe.Pointer(&Strings)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyIf)).Data {
+	if (*reflect.SliceHeader)(unsafe.Pointer(&Interfaces)).Data == (*reflect.SliceHeader)(unsafe.Pointer(&cpyIf)).Data {
 		t.Error("[]interfaces: expected SliceHeader data pointers to point to different locations, they didn't")
 		return
 	}
